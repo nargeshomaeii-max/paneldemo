@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ماهور | سود و موجودی فروشگاهت، زیر نگاه تو</title>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--p1:#ed3d8a;--p2:#a855f7;--dark:#3b1740;--muted:#8b7a92;--bg:#fdf3f8;--card:#fff;--line:#f3e2ee;--green:#12b76a;--yellow:#f79009;--red:#f04438;--shadow:0 10px 35px rgba(190,80,150,.14)}
+[data-theme="blue"]{--p1:#0ea5e9;--p2:#6366f1;--dark:#0f2440;--bg:#eff6ff;--line:#dbeafe}
+[data-theme="warm"]{--p1:#f97316;--p2:#eab308;--dark:#431407;--bg:#fff7ed;--line:#ffedd5}
+[data-theme="green"]{--p1:#10b981;--p2:#84cc16;--dark:#052e22;--bg:#f0fdf4;--line:#dcfce7}
+body{font-family:Vazirmatn,Tahoma,sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}
+button,input,select,textarea{font-family:inherit}button{cursor:pointer;border:none}input,select,textarea{color:var(--dark)}
+/* LOGIN */
+.login-wrap{min-height:100vh;display:grid;grid-template-columns:1fr 1.05fr;background:#fff}
+.login-form-side{display:flex;align-items:center;justify-content:center;padding:28px;background:linear-gradient(180deg,#fff,#fdf3f8)}
+.login-box{width:100%;max-width:430px}
+.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.login-logo-box{width:56px;height:56px;border-radius:18px;background:linear-gradient(135deg,var(--p1),var(--p2));display:grid;place-items:center;color:#fff;font-size:26px;box-shadow:0 12px 25px rgba(237,61,138,.3)}
+.login-box h1{font-size:30px;line-height:1.5;font-weight:900}.login-box h1 em{font-style:normal;color:var(--p1)}
+.login-box>p{color:var(--muted);font-size:13.5px;line-height:2;margin:8px 0 22px}
+.login-field{margin-bottom:14px}.login-field label{font-size:12.5px;font-weight:800;display:block;margin-bottom:7px}
+.login-input{display:flex;align-items:center;gap:9px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:0 13px;transition:.2s}
+.login-input:focus-within{border-color:var(--p1);box-shadow:0 0 0 4px rgba(237,61,138,.12)}
+.login-input input{border:none;outline:none;padding:14px 0;width:100%;font-size:14px;background:transparent}
+.login-input button{background:#fdf0f6;border-radius:9px;padding:7px 9px;font-size:11px;font-weight:800;color:var(--p1);white-space:nowrap}
+.login-error{display:none;background:#fff1f0;color:#b42318;border:1px solid #ffd6d2;padding:11px 13px;border-radius:12px;font-size:12.5px;font-weight:700;margin-bottom:13px}
+.login-error.show{display:block;animation:shake .35s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(5px)}75%{transform:translateX(-5px)}}
+.login-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);margin:4px 0 18px}
+.login-row label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.btn-login{width:100%;padding:15px;border-radius:14px;background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff;font-weight:900;font-size:15px;box-shadow:0 12px 25px rgba(168,85,247,.3);transition:.2s}
+.btn-login:hover{transform:translateY(-2px)}
+.demo-box{margin-top:16px;background:#fff7fb;border:1.5px dashed #f6b8d3;border-radius:14px;padding:13px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12.5px;line-height:2}
+.demo-box button{background:var(--dark);color:#fff;padding:8px 11px;border-radius:9px;font-size:11.5px;font-weight:800;white-space:nowrap}
+.login-visual{position:relative;overflow:hidden;min-height:100vh}
+.login-visual img.bg{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.login-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,rgba(59,23,64,.15),rgba(168,37,110,.82))}
+.visual-content{position:relative;z-index:2;color:#fff;padding:42px;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.visual-content h2{font-size:34px;line-height:1.6;font-weight:900;max-width:520px}
+.visual-content p{opacity:.92;line-height:2;font-size:14px;margin:10px 0 20px;max-width:520px}
+.visual-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:620px}
+.visual-stats div{background:rgba(255,255,255,.16);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.3);border-radius:16px;padding:14px}
+.visual-stats b{font-size:18px;display:block}.visual-stats span{font-size:11px;opacity:.9}
+/* APP */
+.app{display:flex;min-height:100vh}
+.sidebar{width:272px;background:#fff;border-left:1px solid var(--line);padding:20px 16px;position:fixed;right:0;top:0;bottom:0;z-index:50;display:flex;flex-direction:column;overflow-y:auto}
+.logo{display:flex;align-items:center;gap:10px;padding:4px 6px 18px}
+.logo-box{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--p1),var(--p2));display:grid;place-items:center;color:#fff;font-size:22px;overflow:hidden;flex-shrink:0}
+.logo-box img{width:100%;height:100%;object-fit:cover;display:none}
+.logo b{font-size:18px;line-height:1.2}.logo span{font-size:11px;color:var(--muted);display:block;font-weight:400}
+.nav{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.nav button{display:flex;align-items:center;gap:11px;padding:12px 13px;border-radius:13px;background:transparent;color:#5b4760;font-weight:600;font-size:14.5px;text-align:right;transition:.2s;width:100%}
+.nav button:hover{background:#fdf0f6;transform:translateX(-2px)}
+.nav button.active{background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff;box-shadow:0 8px 20px rgba(237,61,138,.3)}
+.nav .badge{margin-right:auto;background:#fff0f5;color:var(--p1);font-size:11px;padding:2px 7px;border-radius:20px}
+.nav button.active .badge{background:rgba(255,255,255,.25);color:#fff}
+.ai-mini{margin-top:auto;background:linear-gradient(135deg,var(--p1),var(--p2));border-radius:18px;padding:16px;color:#fff;position:relative;overflow:hidden}
+.ai-mini h4{font-size:14px}.ai-mini p{font-size:11.5px;opacity:.9;line-height:1.9;margin:6px 0 12px}
+.ai-mini button{background:#fff;color:var(--p1);padding:8px 12px;border-radius:10px;font-weight:800;font-size:12.5px;width:100%}
+.user{display:flex;align-items:center;gap:10px;padding:14px 6px 0;border-top:1px solid var(--line);margin-top:14px}
+.avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;flex-shrink:0;background:linear-gradient(135deg,var(--p1),var(--p2))}
+.main{flex:1;margin-right:272px;padding:20px 24px 90px;max-width:1380px;width:100%}
+.topbar{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.icon-btn{width:44px;height:44px;border-radius:12px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-size:18px;position:relative;box-shadow:0 4px 14px rgba(0,0,0,.03);flex-shrink:0}
+.dot{position:absolute;top:9px;left:10px;width:8px;height:8px;background:var(--p1);border-radius:50%;border:2px solid #fff}
+.search{flex:1;max-width:460px;background:#fff;border:1px solid var(--line);border-radius:13px;display:flex;align-items:center;gap:8px;padding:0 13px}
+.search input{border:none;outline:none;padding:12px 0;width:100%;font-size:13.5px;background:transparent}
+.btn-primary{background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff;padding:12px 18px;border-radius:13px;font-weight:800;font-size:13.5px;box-shadow:0 8px 20px rgba(168,85,247,.3);transition:.2s}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-light{background:#fff;border:1px solid var(--line);padding:11px 15px;border-radius:12px;font-weight:700;font-size:13px}
+.btn-dark{background:var(--dark);color:#fff;padding:11px 15px;border-radius:12px;font-weight:800;font-size:13px}
+.menu-btn{display:none}
+.hero{background:linear-gradient(120deg,#fff 30%,#ffe4f1);border:1px solid var(--line);border-radius:24px;padding:22px 24px;display:flex;justify-content:space-between;align-items:center;overflow:hidden;position:relative;margin-bottom:18px}
+.hero h1{font-size:clamp(22px,3vw,34px);line-height:1.4;font-weight:900}.hero h1 em{font-style:normal;color:var(--p1)}
+.hero p{color:var(--muted);font-size:13.5px;margin-top:6px}
+.hero-art{font-size:52px;background:#fff;width:96px;height:96px;border-radius:24px;display:grid;place-items:center;box-shadow:var(--shadow);transform:rotate(-6deg)}
+.role-chip{display:inline-flex;gap:6px;align-items:center;background:#fff;border:1px solid var(--line);padding:6px 10px;border-radius:20px;font-size:11px;font-weight:800;color:var(--p1)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:17px;box-shadow:0 5px 20px rgba(180,90,150,.06);transition:.2s}
+.stat:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.stat-top{display:flex;justify-content:space-between;align-items:center}.stat label{font-size:12.5px;color:var(--muted);font-weight:600}
+.stat h3{font-size:21px;margin:8px 0 2px}.stat small{font-size:11px;color:var(--muted)}
+.up{color:var(--green);font-size:11px;font-weight:800}
+.ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:19px;color:#fff}
+.grid2{display:grid;grid-template-columns:1.55fr 1fr;gap:16px;margin-bottom:16px}
+.grid2b{display:grid;grid-template-columns:1fr 1.35fr;gap:16px;margin-bottom:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 5px 20px rgba(180,90,150,.05)}
+.card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px;flex-wrap:wrap}
+.card-head h3{font-size:15.5px}.card-head span,.link{font-size:12px;color:var(--p1);font-weight:700;cursor:pointer;background:none}
+canvas{max-height:240px}
+.reminder{display:flex;gap:10px;align-items:center;padding:11px 0;border-bottom:1px dashed #f1dce9}
+.reminder:last-child{border:none}.reminder p{font-size:13px;font-weight:700}.reminder small{color:var(--muted);font-size:11.5px;line-height:1.9}
+.follow{margin-right:auto;background:#fff0f7;color:var(--p1);padding:7px 10px;border-radius:9px;font-size:11.5px;font-weight:800;white-space:nowrap}
+.follow.gray{background:#f6f2f6;color:#6b556f}.follow.red{background:#fff1f0;color:var(--red)}
+.alert-card{background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff;border-radius:20px;padding:18px;display:flex;gap:16px;align-items:center;overflow:hidden}
+.alert-card img{width:96px;height:96px;object-fit:cover;border-radius:16px;border:4px solid rgba(255,255,255,.5)}
+.alert-card h3{font-size:16px}.alert-card p{font-size:12.5px;opacity:.92;line-height:2;margin:4px 0 10px}
+.alert-card button{background:#fff;color:var(--p1);padding:9px 13px;border-radius:10px;font-weight:800;font-size:12.5px}
+.vip-row{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px dashed #eee}
+.vip-row img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.vip-tag{background:var(--p1);color:#fff;font-size:10px;padding:3px 7px;border-radius:20px;font-weight:800}
+.cats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin:8px 0 16px}
+.cat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 8px;text-align:center;cursor:pointer;transition:.2s}
+.cat:hover{transform:translateY(-4px);border-color:var(--p1)}.cat .e{font-size:28px}.cat p{font-size:12px;font-weight:700;margin-top:7px}.cat small{color:var(--muted);font-size:11px}
+table{width:100%;border-collapse:collapse;font-size:13px}th{color:var(--muted);font-size:11.5px;text-align:right;padding:10px 8px;border-bottom:1px solid var(--line)}td{padding:11px 8px;border-bottom:1px solid #faf0f6;vertical-align:middle}
+.pill{display:inline-block;padding:4px 9px;border-radius:20px;font-size:11px;font-weight:800}
+.g{background:#dcfae6;color:#027a48}.y{background:#fef0c7;color:#b54708}.r{background:#fee4e2;color:#b42318}.p{background:#ffe4f1;color:#c81e6b}.b{background:#dbeafe;color:#1d4ed8}.grayp{background:#f1f5f9;color:#475569}
+.view{display:none;animation:fade .3s}.view.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.page-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.page-head h2{font-size:22px}.page-head p{color:var(--muted);font-size:13px;margin-top:4px;line-height:1.9}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.pills button{padding:9px 14px;border-radius:20px;background:#fff;border:1px solid var(--line);font-weight:700;font-size:12.5px}
+.pills button.active{background:var(--dark);color:#fff}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.prod{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.2s}
+.prod:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.prod img{width:100%;height:165px;object-fit:cover}
+.prod-body{padding:14px}.prod-top{display:flex;justify-content:space-between;gap:8px}.prod h4{font-size:14.5px}
+.price{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin:10px 0;gap:8px;flex-wrap:wrap}.price b{color:var(--dark);font-size:13px}
+.stockbar{height:7px;background:#fbeaf3;border-radius:20px;overflow:hidden;margin:7px 0}.stockbar i{display:block;height:100%;border-radius:20px}
+.prod-actions{display:flex;gap:7px;margin-top:12px}.prod-actions button{flex:1;padding:9px;border-radius:10px;font-size:12px;font-weight:800;background:#fdf0f6;color:var(--p1)}.prod-actions .del{background:#fff1f0;color:var(--red);flex:0 0 42px}
+.customers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.cust{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;cursor:pointer;transition:.2s}.cust:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field label{font-size:12.5px;font-weight:700;display:block;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;outline:none;font-size:13.5px;background:#fff}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--p1);box-shadow:0 0 0 3px rgba(237,61,138,.12)}
+.sale-preview{background:linear-gradient(135deg,#fff0f7,#f3e8ff);border-radius:16px;padding:16px;display:grid;grid-template-columns:1fr 1fr 1fr;text-align:center;gap:8px}
+.sale-preview b{font-size:16px;display:block}.sale-preview span{font-size:11px;color:var(--muted)}
+.dropdown{position:relative}
+.drop-list{position:absolute;top:74px;right:0;left:0;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);z-index:20;overflow:hidden;display:none;max-height:240px;overflow-y:auto}
+.drop-item{display:flex;gap:10px;align-items:center;padding:10px;cursor:pointer;font-size:13px}.drop-item:hover{background:#fdf0f6}.drop-item img{width:38px;height:38px;border-radius:9px;object-fit:cover}
+.notif{position:absolute;top:52px;left:0;width:320px;max-width:86vw;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:14px;z-index:60;display:none}.notif.open{display:block}
+.modal{position:fixed;inset:0;background:rgba(50,15,45,.55);backdrop-filter:blur(4px);z-index:100;display:none;place-items:center;padding:16px}
+.modal.open{display:grid}.modal-box{background:#fff;border-radius:22px;width:100%;max-width:560px;max-height:90vh;overflow:auto;padding:22px}
+.modal-box h3{margin-bottom:16px;font-size:17px}.close{float:left;background:#fdf0f6;width:34px;height:34px;border-radius:50%}
+.themes{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.theme{border:2px solid var(--line);border-radius:16px;padding:12px;text-align:center;cursor:pointer;background:#fff}.theme.active{border-color:var(--p1)}.theme i{height:42px;border-radius:10px;display:block;margin-bottom:8px}
+.toast{position:fixed;bottom:20px;left:20px;background:var(--dark);color:#fff;padding:14px 18px;border-radius:14px;z-index:300;font-size:13px;box-shadow:var(--shadow);display:none;max-width:90vw;line-height:1.9}
+.empty{text-align:center;padding:38px 16px;color:var(--muted)}.empty .e{font-size:44px}
+.mobile-nav{display:none}
+.lock-box{background:linear-gradient(135deg,#fff7ed,#fff1f2);border:1.5px dashed #fdba74;border-radius:16px;padding:20px;text-align:center;color:#9a3412;line-height:2}
+.lock-box b{font-size:15px}
+.user-actions{display:flex;gap:6px;flex-wrap:wrap}
+.switch-note{font-size:11.5px;color:var(--muted);line-height:1.9}
+.password-hint{font-size:11px;color:var(--muted);margin-top:5px}
+@media(max-width:1000px){.stats{grid-template-columns:repeat(2,1fr)}.products,.customers{grid-template-columns:repeat(2,1fr)}.cats{grid-template-columns:repeat(3,1fr)}.grid2,.grid2b{grid-template-columns:1fr}.themes{grid-template-columns:repeat(2,1fr)}.login-wrap{grid-template-columns:1fr}.login-visual{display:none}}
+@media(max-width:760px){.sidebar{transform:translateX(105%);transition:.3s;width:260px}.sidebar.open{transform:none}.main{margin-right:0;padding:14px 14px 86px}.menu-btn{display:grid}.products,.customers{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.hero-art{display:none}.mobile-nav{display:flex;position:fixed;bottom:0;right:0;left:0;background:#fff;border-top:1px solid var(--line);z-index:80;justify-content:space-around;padding:9px 4px}.mobile-nav button{background:none;font-size:10.5px;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px}.mobile-nav button.active{color:var(--p1);font-weight:800}.mobile-nav i{font-size:19px;font-style:normal}.sale-preview{grid-template-columns:1fr;gap:10px}.visual-stats{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<section class="login-wrap" id="loginScreen">
+  <div class="login-form-side">
+    <div class="login-box">
+      <div class="login-logo">
+        <div class="login-logo-box">🛍️</div>
+        <div><b style="font-size:20px">ماهور</b><span style="display:block;color:var(--muted);font-size:11px">سامانه مدیریت فروشگاه</span></div>
+      </div>
+      <h1>سلام! به فروشگاهت <em>خوش برگشتی</em> 👋</h1>
+      <p>برای دیدن سود، موجودی، مشتری‌ها و گزارش‌های فروشگاهت، وارد پنل شو. فقط چند ثانیه طول می‌کشه.</p>
+      <div class="login-error" id="loginError">نام کاربری یا رمز عبور اشتباه است. دوباره تلاش کن.</div>
+      <form onsubmit="doLogin(event)">
+        <div class="login-field">
+          <label>نام کاربری</label>
+          <div class="login-input"><span>👤</span><input id="loginUser" placeholder="مثلاً Admin" autocomplete="username"></div>
+        </div>
+        <div class="login-field">
+          <label>رمز عبور</label>
+          <div class="login-input"><span>🔒</span><input id="loginPass" type="password" placeholder="رمز عبورت را وارد کن" autocomplete="current-password"><button type="button" onclick="togglePass()">نمایش</button></div>
+        </div>
+        <div class="login-row">
+          <label><input type="checkbox" id="rememberMe" checked> مرا به خاطر بسپار</label>
+          <button type="button" class="link" onclick="toast('رمز پیش‌فرض ورود: Admin — از تنظیمات می‌توانی آن را تغییر دهی.')">رمز را فراموش کردم؟</button>
+        </div>
+        <button class="btn-login" type="submit">ورود به داشبورد ←</button>
+      </form>
+      <div class="demo-box">
+        <div>حساب پیش‌فرض مدیر:<br><b>نام کاربری: Admin</b> &nbsp;|&nbsp; <b>رمز: Admin</b></div>
+        <button onclick="fillDemo()">وارد کردن خودکار</button>
+      </div>
+      <p style="font-size:11px;color:var(--muted);line-height:2;margin-top:14px;text-align:center">🔐 مدیریت کاربران و ساخت حساب جدید، بعد از ورود فقط در بخش «تنظیمات» و فقط برای مدیر سیستم (Admin) در دسترس است.</p>
+    </div>
+  </div>
+  <div class="login-visual">
+    <img class="bg" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80" alt="فروشگاه">
+    <div class="visual-content">
+      <h2>سود و موجودی فروشگاهت، همه زیر نگاه تو</h2>
+      <p>ماهور برای فروشگاه‌های کوچک و اینستاگرامی ساخته شده؛ ساده، فارسی و بدون نیاز به دانش فنی.</p>
+      <div class="visual-stats">
+        <div><b>۳۰ ثانیه</b><span>ثبت هر فروش</span></div>
+        <div><b>خودکار</b><span>محاسبه سود و موجودی</span></div>
+        <div><b>هوشمند</b><span>یادآوری مشتری و VIP</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APP -->
+<div id="appWrapper" style="display:none">
+<div class="app">
+<aside class="sidebar" id="sidebar">
+  <div class="logo">
+    <div class="logo-box"><span id="logoEmoji">🛍️</span><img id="shopLogoImg" alt="لوگو"></div>
+    <div><b id="shopNameDisplay">بوتیک ماهور</b><span>پنل فروشگاه • نسخه حرفه‌ای</span></div>
+  </div>
+  <nav class="nav">
+    <button class="active" data-view="dashboard" onclick="go('dashboard',this)">⌂ داشبورد</button>
+    <button data-view="products" onclick="go('products',this)">▦ محصولات <span class="badge" id="navProdCount">۸ کالا</span></button>
+    <button data-view="sales" onclick="go('sales',this)">🛒 فروش‌ها <span class="badge">جدید</span></button>
+    <button data-view="customers" onclick="go('customers',this)">👥 مشتریان</button>
+    <button data-view="reports" onclick="go('reports',this)">📊 گزارش‌ها</button>
+    <button data-view="settings" onclick="go('settings',this)">⚙️ تنظیمات و تم <span class="badge" id="settingsBadge">Admin</span></button>
+  </nav>
+  <div class="ai-mini">
+    <h4>✦ دستیار تبلیغات هوشمند</h4>
+    <p>برای کالاهای پُرموجـودی، کپشن و ایده تبلیغاتی آماده کن.</p>
+    <button onclick="openAI()">ساخت پست تبلیغاتی</button>
+  </div>
+  <div class="user">
+    <div class="avatar" id="currentAvatar">م</div>
+    <div><b style="font-size:13px" id="currentUserName">مریم احمدی</b><br><small style="color:var(--muted);font-size:11px" id="currentUserRole">مدیر فروشگاه</small></div>
+    <button class="link" style="margin-right:auto" onclick="doLogout()">خروج</button>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <button class="icon-btn menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+    <div class="search">🔍 <input id="globalSearch" placeholder="جستجوی محصول، مشتری یا سفارش..." oninput="globalSearchFn(this.value)"></div>
+    <span class="role-chip" id="topRoleChip">👑 مدیر سیستم</span>
+    <div style="position:relative">
+      <button class="icon-btn" onclick="document.getElementById('notifBox').classList.toggle('open')">🔔<span class="dot"></span></button>
+      <div class="notif" id="notifBox"><b style="font-size:14px">اعلان‌ها</b><div id="notifList"></div><button class="btn-light" style="width:100%;margin-top:10px" onclick="go('products')">مشاهده همه هشدارها</button></div>
+    </div>
+    <button class="btn-primary" onclick="go('sales')">＋ ثبت فروش سریع</button>
+  </div>
+
+  <!-- DASHBOARD -->
+  <section class="view active" id="view-dashboard">
+    <div class="hero">
+      <div>
+        <h1>سود و موجودی <em>فروشگاهت،</em><br>همه زیر نگاه تو 👀</h1>
+        <p>سامانه مدیریت مالی و مشتری فروشگاه‌های آنلاین • امروز <span id="todayText"></span> • خوش آمدی <b id="welcomeName">مدیر</b></p>
+        <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+          <button class="btn-primary" onclick="go('sales')">شروع فروش امروز ←</button>
+          <button class="btn-light" onclick="openProduct()">＋ افزودن محصول</button>
+        </div>
+      </div>
+      <div class="hero-art">💗</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-top"><label>سود خالص کل</label><span class="ic" style="background:#ec4899">👜</span></div><h3 id="stProfit">۰ تومان</h3><span class="up">↑ ۸٪ نسبت به هفته قبل</span> <small>حاشیه سود سالم</small></div>
+      <div class="stat"><div class="stat-top"><label>کل فروش</label><span class="ic" style="background:#38bdf8">🛒</span></div><h3 id="stSales">۰ تومان</h3><span class="up">↑ ۱۲٪ نسبت به هفته قبل</span></div>
+      <div class="stat"><div class="stat-top"><label>سفارش‌ها</label><span class="ic" style="background:#a855f7">📦</span></div><h3 id="stOrders">۰ عدد</h3><span class="up">↑ ۱۸٪</span> <small id="stToday">۱۴ فروش امروز</small></div>
+      <div class="stat"><div class="stat-top"><label>مشتریان جدید + هشدار موجودی</label><span class="ic" style="background:#f472b6">👤</span></div><h3><span id="stCustomers">۰ نفر</span> • <span style="color:var(--red)" id="stLow">۰ هشدار</span></h3><span class="up">↑ ۱۶٪ مشتری جدید</span></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card"><div class="card-head"><h3>📈 نمودار سود و فروش</h3><span>۷ روز اخیر • فروش‌ها</span></div><canvas id="lineChart"></canvas></div>
+      <div class="card"><div class="card-head"><h3>⏰ یادآوری‌های امروز</h3><button class="link" onclick="go('customers')">مشاهده همه</button></div><div id="reminderList"></div></div>
+    </div>
+
+    <div class="grid2b">
+      <div class="alert-card">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80" alt="هشدار">
+        <div><h3>⚠ هشدار موجودی</h3><p id="alertText">هدفون بی‌سیم مدل P47<br>موجودی: فقط ۴ عدد مانده</p><button onclick="filterLow()">مشاهده و مدیریت</button></div>
+      </div>
+      <div class="card"><div class="card-head"><h3>⭐ مشتریان ویژه VIP</h3><button class="link" onclick="go('customers')">همه مشتریان</button></div><div id="vipList"></div></div>
+    </div>
+
+    <h3 style="margin:6px 2px 10px;font-size:15px">دسته‌بندی محصولات</h3>
+    <div class="cats" id="catsStrip"></div>
+
+    <div class="card">
+      <div class="card-head"><h3>🧾 فروش‌های اخیر</h3><button class="link" onclick="go('sales')">مشاهده همه فروش‌ها ←</button></div>
+      <div style="overflow:auto"><table><thead><tr><th>محصول</th><th>مشتری</th><th>تعداد</th><th>مبلغ</th><th>سود</th><th>زمان</th></tr></thead><tbody id="recentSales"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="view" id="view-products">
+    <div class="page-head"><div><h2>📦 محصولات و انبار</h2><p>موجودی، قیمت خرید و فروش و درصد سود هر کالا را اینجا مدیریت کن.</p></div><button class="btn-primary" onclick="openProduct()">＋ افزودن محصول جدید</button></div>
+    <div class="pills" id="catPills"></div>
+    <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+      <input id="prodSearch" oninput="renderProducts()" placeholder="🔍 جستجوی نام محصول..." style="flex:1;min-width:200px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff">
+      <select id="sortProd" onchange="renderProducts()" style="padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff"><option value="new">جدیدترین</option><option value="profit">بیشترین سود</option><option value="stock">کمترین موجودی</option><option value="price">گران‌ترین</option></select>
+      <button class="btn-light" onclick="filterLow()">⚠ فقط کم‌موجودی‌ها</button>
+    </div>
+    <div class="products" id="productGrid"></div>
+    <div class="empty" id="prodEmpty" style="display:none"><div class="e">🌸</div><h3>هنوز محصولی اینجا نیست</h3><p>بیا اولین محصولت رو ثبت کن تا فروش رو شروع کنیم.</p><br><button class="btn-primary" onclick="openProduct()">ثبت اولین محصول</button></div>
+  </section>
+
+  <!-- SALES -->
+  <section class="view" id="view-sales">
+    <div class="page-head"><div><h2>🛒 ثبت فروش</h2><p>در کمتر از ۳۰ ثانیه فروش جدید ثبت کن؛ موجودی و سود خودکار حساب می‌شود.</p></div></div>
+    <div class="grid2">
+      <div class="card">
+        <h3 style="margin-bottom:16px">✦ فرم سریع ثبت فروش</h3>
+        <div class="field dropdown" style="margin-bottom:14px"><label>جستجو و انتخاب محصول *</label><input id="saleProdInput" placeholder="مثلاً: هدفون، کیف، کفش..." autocomplete="off" oninput="showProdDrop(this.value)" onfocus="showProdDrop(this.value)"><div class="drop-list" id="prodDrop"></div><small id="selectedProdInfo" style="color:var(--p1);font-weight:700"></small></div>
+        <div class="form-grid">
+          <div class="field"><label>تعداد *</label><input type="number" id="saleQty" value="1" min="1" oninput="calcSale()"></div>
+          <div class="field"><label>مشتری</label><select id="saleCustomer" onchange="toggleNewCust()"></select></div>
+        </div>
+        <div id="newCustBox" style="display:none;margin-top:14px"><div class="form-grid"><div class="field"><label>نام مشتری جدید</label><input id="newCustName" placeholder="نام و نام خانوادگی"></div><div class="field"><label>شماره موبایل</label><input id="newCustPhone" placeholder="۰۹۱۲ ـ ـ ـ ـ ـ ـ ـ"></div></div></div>
+        <div class="field" style="margin-top:14px"><label>تخفیف (تومان - اختیاری)</label><input type="number" id="saleDiscount" value="0" oninput="calcSale()"></div>
+        <div class="sale-preview" style="margin:16px 0"><div><span>مبلغ قابل پرداخت</span><b id="prevTotal">۰ تومان</b></div><div><span>سود این فروش</span><b id="prevProfit" style="color:var(--green)">۰ تومان</b></div><div><span>موجودی بعد از فروش</span><b id="prevStock">—</b></div></div>
+        <p id="saleWarn" style="color:var(--red);font-size:12px;font-weight:700;margin-bottom:10px"></p>
+        <button class="btn-primary" style="width:100%;padding:15px" onclick="submitSale()">✓ ثبت فروش و کسر از موجودی</button>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:14px;background:linear-gradient(135deg,var(--p1),var(--p2));color:#fff;border:none"><h3>💡 پیش‌بینی اتمام موجودی</h3><div id="forecastList" style="margin-top:12px;font-size:13px;line-height:2"></div></div>
+        <div class="card"><div class="card-head"><h3>پرفروش‌ترین‌های این هفته</h3></div><canvas id="barChart2"></canvas></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px"><div class="card-head"><h3>تاریخچه فروش‌ها</h3><span id="salesCount"></span></div><div style="overflow:auto"><table><thead><tr><th>کد</th><th>محصول</th><th>مشتری</th><th>تعداد</th><th>مبلغ</th><th>سود</th><th>تاریخ</th><th></th></tr></thead><tbody id="salesTable"></tbody></table></div></div>
+  </section>
+
+  <!-- CUSTOMERS -->
+  <section class="view" id="view-customers">
+    <div class="page-head"><div><h2>👥 مشتریان</h2><p>مشتری‌های VIP به‌صورت خودکار مشخص می‌شوند؛ بالای ۸ میلیون تومان خرید = VIP ⭐</p></div><button class="btn-primary" onclick="openCustomer()">＋ مشتری جدید</button></div>
+    <div class="pills"><button class="active" onclick="setCustFilter('all',this)">همه مشتریان</button><button onclick="setCustFilter('vip',this)">⭐ فقط VIP</button><button onclick="setCustFilter('reminder',this)">⏰ نیازمند پیگیری</button></div>
+    <div class="customers" id="customerGrid"></div>
+    <div class="card" style="margin-top:16px"><div class="card-head"><h3>⏰ مشتریانی که بیش از ۳۰ روز است خرید نکرده‌اند</h3><span>یادآوری هوشمند</span></div><div id="reminderFull"></div></div>
+  </section>
+
+  <!-- REPORTS -->
+  <section class="view" id="view-reports">
+    <div class="page-head"><div><h2>📊 گزارش‌ها</h2><p>دید روشن از سود، پرفروش‌ترین محصولات و بهترین مشتری‌ها</p></div><button class="btn-light" onclick="exportReport()">⬇ دانلود گزارش (CSV)</button></div>
+    <div class="grid2"><div class="card"><div class="card-head"><h3>روند فروش و سود</h3></div><canvas id="lineChartR"></canvas></div><div class="card"><div class="card-head"><h3>پرسودترین محصولات</h3></div><canvas id="barChartR"></canvas></div></div>
+    <div class="grid2"><div class="card"><h3 style="margin-bottom:12px">🏆 رتبه‌بندی محصولات</h3><div id="rankProducts"></div></div><div class="card"><h3 style="margin-bottom:12px">👑 بهترین مشتری‌ها</h3><div id="rankCustomers"></div></div></div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section class="view" id="view-settings">
+    <div class="page-head"><div><h2>⚙️ تنظیمات و شخصی‌سازی</h2><p>ظاهر پنل، اطلاعات فروشگاه و مدیریت ورود کاربران را اینجا تنظیم کن.</p></div><span class="role-chip" id="settingsRoleChip">👑 مدیر سیستم</span></div>
+
+    <!-- USER MANAGEMENT : ADMIN ONLY -->
+    <div class="card" style="margin-bottom:16px;border:2px solid #f6c6de">
+      <div class="card-head">
+        <div><h3>🔐 مدیریت کاربران و ورود به پنل</h3><span style="color:var(--muted)">ساخت کاربر جدید، ویرایش نام کاربری و رمز عبور — فقط برای Admin</span></div>
+        <button class="btn-primary" id="addUserBtn" onclick="openUserModal()">＋ افزودن کاربر جدید</button>
+      </div>
+      <div id="userMgmtContent"></div>
+    </div>
+
+    <div class="card" style="margin-bottom:16px">
+      <h3 style="margin-bottom:14px">🎨 قالب رنگی فروشگاه</h3>
+      <div class="themes">
+        <div class="theme active" onclick="setTheme('pink',this)"><i style="background:linear-gradient(135deg,#ec4899,#a855f7)"></i><b>پاستلی بوتیک</b><br><small>پوشاک و زیبایی</small></div>
+        <div class="theme" onclick="setTheme('blue',this)"><i style="background:linear-gradient(135deg,#0ea5e9,#6366f1)"></i><b>آبی تکنولوژی</b><br><small>دیجیتال و گجت</small></div>
+        <div class="theme" onclick="setTheme('warm',this)"><i style="background:linear-gradient(135deg,#f97316,#eab308)"></i><b>گرم و صمیمی</b><br><small>کافه و خوراکی</small></div>
+        <div class="theme" onclick="setTheme('green',this)"><i style="background:linear-gradient(135deg,#10b981,#84cc16)"></i><b>سبز طبیعت</b><br><small>ارگانیک و سلامت</small></div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3 style="margin-bottom:14px">🏪 اطلاعات فروشگاه</h3>
+        <div class="field" style="margin-bottom:12px"><label>نام فروشگاه</label><input id="shopNameInput" value="بوتیک ماهور"></div>
+        <div class="field" style="margin-bottom:12px"><label>لوگوی فروشگاه</label><input type="file" accept="image/*" onchange="uploadLogo(event)"><small style="color:var(--muted)">تصویر لوگو در بالای پنل نمایش داده می‌شود.</small></div>
+        <div class="field"><label>حد هشدار موجودی کم (عدد)</label><input type="number" id="lowThreshold" value="5"></div>
+        <button class="btn-primary" style="margin-top:14px;width:100%" onclick="saveSettings()">ذخیره تنظیمات ✓</button>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:12px">🤖 دستیار هوش مصنوعی تبلیغات</h3>
+        <p style="font-size:13px;color:var(--muted);line-height:2">برای محصولاتی که موجودی زیاد یا فروش کمی دارند، کپشن اینستاگرام و ایده تخفیف بساز و مستقیم کپی کن.</p>
+        <button class="btn-primary" style="margin-top:14px" onclick="openAI()">✦ ساخت کپشن تبلیغاتی</button>
+        <hr style="border:none;border-top:1px dashed var(--line);margin:18px 0">
+        <h4 style="font-size:13px">حساب فعلی من</h4>
+        <p style="font-size:12px;color:var(--muted);margin:6px 0 12px;line-height:2" id="myAccountInfo">—</p>
+        <button class="btn-light" onclick="editMyAccount()">✏️ ویرایش حساب من و رمز عبور</button>
+        <hr style="border:none;border-top:1px dashed var(--line);margin:18px 0">
+        <h4 style="font-size:13px">پشتیبان‌گیری داده‌ها</h4>
+        <p style="font-size:12px;color:var(--muted);margin:6px 0 12px">داده‌های نمونه در همین صفحه و کاربران در حافظه مرورگر نگهداری می‌شوند.</p>
+        <button class="btn-light" onclick="resetData()">بازنشانی داده‌های نمونه</button>
+      </div>
+    </div>
+  </section>
+</main>
+</div>
+
+<nav class="mobile-nav">
+  <button class="active" data-view="dashboard" onclick="go('dashboard',this)"><i>⌂</i>داشبورد</button>
+  <button data-view="products" onclick="go('products',this)"><i>▦</i>محصولات</button>
+  <button data-view="sales" onclick="go('sales',this)"><i>🛒</i>فروش</button>
+  <button data-view="customers" onclick="go('customers',this)"><i>👥</i>مشتریان</button>
+  <button data-view="settings" onclick="go('settings',this)"><i>⚙️</i>تنظیمات</button>
+</nav>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal" id="productModal"><div class="modal-box"><button class="close" onclick="closeM('productModal')">✕</button><h3 id="prodModalTitle">افزودن محصول</h3>
+<div class="form-grid">
+<div class="field"><label>نام محصول *</label><input id="pName" placeholder="مثلاً شال نخی بهاره"></div>
+<div class="field"><label>دسته‌بندی</label><select id="pCat"><option>پوشاک</option><option>کیف و اکسسوری</option><option>کفش</option><option>لوازم دیجیتال</option><option>زیبایی و سلامت</option><option>خانه و آشپزخانه</option></select></div>
+<div class="field"><label>قیمت خرید (تومان)</label><input type="number" id="pCost" value="200000" oninput="previewProfit()"></div>
+<div class="field"><label>قیمت فروش (تومان)</label><input type="number" id="pPrice" value="350000" oninput="previewProfit()"></div>
+<div class="field"><label>موجودی فعلی</label><input type="number" id="pStock" value="10"></div>
+<div class="field"><label>لینک تصویر محصول</label><input id="pImg" placeholder="https://..."></div>
+</div>
+<p id="pProfitPrev" style="margin:14px 0;font-size:13px;font-weight:800;color:var(--green)"></p>
+<button class="btn-primary" style="width:100%" onclick="saveProduct()">ذخیره محصول ✓</button></div></div>
+
+<!-- CUSTOMER MODAL -->
+<div class="modal" id="customerModal"><div class="modal-box"><button class="close" onclick="closeM('customerModal')">✕</button><h3>افزودن مشتری جدید</h3>
+<div class="field" style="margin-bottom:12px"><label>نام و نام خانوادگی *</label><input id="cName" placeholder="مثلاً سارا محمدی"></div>
+<div class="field"><label>شماره موبایل</label><input id="cPhone" placeholder="0912 345 6789"></div>
+<button class="btn-primary" style="width:100%;margin-top:16px" onclick="saveCustomer()">ثبت مشتری ✓</button></div></div>
+
+<!-- USER MODAL -->
+<div class="modal" id="userModal"><div class="modal-box"><button class="close" onclick="closeM('userModal')">✕</button>
+<h3 id="userModalTitle">افزودن کاربر جدید</h3>
+<div class="form-grid">
+<div class="field"><label>نام نمایشی *</label><input id="uDisplayName" placeholder="مثلاً مریم احمدی"></div>
+<div class="field"><label>نام کاربری (برای ورود) *</label><input id="uUsername" placeholder="مثلاً maryam یا Admin"></div>
+<div class="field"><label>رمز عبور <span id="passReq">*</span></label><input id="uPassword" type="text" placeholder="حداقل ۴ کاراکتر"><p class="password-hint" id="passHint">برای کاربر جدید رمز الزامی است.</p></div>
+<div class="field"><label>نقش کاربر</label><select id="uRole"><option value="user">کاربر عادی / فروشنده</option><option value="admin">مدیر سیستم (Admin)</option></select></div>
+<div class="field"><label>وضعیت حساب</label><select id="uActive"><option value="1">فعال — اجازه ورود دارد</option><option value="0">غیرفعال — اجازه ورود ندارد</option></select></div>
+<div class="field"><label>توضیح</label><input id="uNote" placeholder="مثلاً فروشنده شیفت صبح"></div>
+</div>
+<p style="font-size:11.5px;color:var(--muted);line-height:2;margin:12px 0">👑 مدیر سیستم به «مدیریت کاربران» در تنظیمات دسترسی دارد. کاربر عادی فقط به داشبورد، محصولات، فروش و مشتریان دسترسی دارد و بخش کاربران برای او قفل است.</p>
+<button class="btn-primary" style="width:100%" onclick="saveUser()">ذخیره کاربر ✓</button>
+</div></div>
+
+<!-- DETAIL MODAL -->
+<div class="modal" id="detailModal"><div class="modal-box"><button class="close" onclick="closeM('detailModal')">✕</button><div id="detailContent"></div></div></div>
+
+<!-- AI MODAL -->
+<div class="modal" id="aiModal"><div class="modal-box"><button class="close" onclick="closeM('aiModal')">✕</button><h3>✦ دستیار تبلیغات با هوش مصنوعی</h3>
+<div class="field"><label>محصول را انتخاب کن (پیشنهاد: موجودی بالا / فروش کم)</label><select id="aiProduct" onchange="genAI()"></select></div>
+<div class="field" style="margin-top:12px"><label>لحن کپشن</label><select id="aiTone" onchange="genAI()"><option>صمیمی و دوستانه</option><option>هیجانی و فروش‌محور</option><option>لوکس و مینیمال</option></select></div>
+<textarea id="aiOutput" rows="9" style="width:100%;margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:14px;line-height:2;font-size:13.5px"></textarea>
+<div style="display:flex;gap:8px;margin-top:12px"><button class="btn-primary" style="flex:1" onclick="copyAI()">📋 کپی کپشن</button><button class="btn-light" onclick="genAI()">🔄 ساخت نسخه جدید</button></div>
+<p style="font-size:11px;color:var(--muted);margin-top:10px;line-height:2">💡 ایده طرح: عکس محصول روی پس‌زمینه پاستلی + برچسب «٪ تخفیف محدود» در گوشه تصویر و استوری نظرسنجی.</p></div></div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal" id="successModal"><div class="modal-box" style="text-align:center;max-width:420px"><div style="font-size:54px">🎉</div><h3 style="margin:10px 0">فروش با موفقیت ثبت شد!</h3><p id="successText" style="line-height:2.1;color:var(--muted);font-size:14px"></p><button class="btn-primary" style="width:100%;margin-top:16px" onclick="closeM('successModal');go('dashboard')">عالیه، برگرد به داشبورد</button><button class="btn-light" style="width:100%;margin-top:8px" onclick="closeM('successModal')">ثبت فروش بعدی</button></div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const fmt=n=>Math.round(Number(n)||0).toLocaleString('fa-IR');
+const faNum=n=>Number(n).toLocaleString('fa-IR');
+let lowThreshold=5, editId=null, selectedProductId=null, custFilter='all', activeCat='همه', onlyLow=false, editUserId=null, currentUser=null, charts={};
+
+/* ---------- USERS / AUTH ---------- */
+function seedUsers(){return [{id:1,username:'Admin',password:'Admin',displayName:'مدیر فروشگاه',role:'admin',active:true,note:'حساب اصلی مدیر',created:'پیش‌فرض سیستم'}]}
+function loadUsers(){try{let u=JSON.parse(localStorage.getItem('mahoor_users_v1')); if(Array.isArray(u)&&u.length) return u;}catch(e){} return seedUsers();}
+let users=loadUsers();
+function saveUsers(){localStorage.setItem('mahoor_users_v1',JSON.stringify(users))}
+saveUsers();
+function roleLabel(r){return r==='admin'?'مدیر سیستم (Admin)':'کاربر عادی / فروشنده'}
+function isAdmin(){return currentUser && currentUser.role==='admin'}
+function fillDemo(){document.getElementById('loginUser').value='Admin';document.getElementById('loginPass').value='Admin';toast('نام کاربری و رمز پیش‌فرض وارد شد. حالا «ورود» را بزن ✓')}
+function togglePass(){let p=document.getElementById('loginPass');p.type=p.type==='password'?'text':'password'}
+function doLogin(e){e.preventDefault();let un=document.getElementById('loginUser').value.trim(),pw=document.getElementById('loginPass').value;
+ let u=users.find(x=>x.username.toLowerCase()===un.toLowerCase() && x.password===pw);
+ let err=document.getElementById('loginError');
+ if(!u){err.textContent='نام کاربری یا رمز عبور اشتباه است. (پیش‌فرض: Admin / Admin)';err.classList.add('show');return}
+ if(!u.active){err.textContent='این حساب غیرفعال شده است. با مدیر سیستم تماس بگیر.';err.classList.add('show');return}
+ err.classList.remove('show');currentUser=u;
+ if(document.getElementById('rememberMe').checked) localStorage.setItem('mahoor_session',u.username); else sessionStorage.setItem('mahoor_session',u.username);
+ enterApp(); toast('خوش آمدی '+u.displayName+' 🌸');
+}
+function doLogout(){localStorage.removeItem('mahoor_session');sessionStorage.removeItem('mahoor_session');currentUser=null;document.getElementById('appWrapper').style.display='none';document.getElementById('loginScreen').style.display='grid';document.getElementById('loginPass').value='';window.scrollTo(0,0);toast('با موفقیت خارج شدی. به امید دیدار 👋')}
+function enterApp(){
+ document.getElementById('loginScreen').style.display='none';document.getElementById('appWrapper').style.display='block';
+ updateCurrentUserUI(); renderAll(); renderUserManagement();
+ setTimeout(()=>{makeChart('lineChart','line');makeChart('barChart2','bar'); if(document.getElementById('view-reports').classList.contains('active'))renderReportCharts();},80);
+ selectProduct(1);
+}
+function updateCurrentUserUI(){
+ if(!currentUser)return;
+ document.getElementById('currentUserName').textContent=currentUser.displayName;
+ document.getElementById('currentUserRole').textContent=roleLabel(currentUser.role)+' • @'+currentUser.username;
+ document.getElementById('currentAvatar').textContent=(currentUser.displayName||currentUser.username)[0];
+ document.getElementById('welcomeName').textContent=currentUser.displayName;
+ let chip=isAdmin()?'👑 مدیر سیستم':'👤 '+roleLabel(currentUser.role);
+ document.getElementById('topRoleChip').textContent=chip; document.getElementById('settingsRoleChip').textContent=chip;
+ document.getElementById('settingsBadge').textContent=isAdmin()?'Admin':'قفل';
+ document.getElementById('myAccountInfo').innerHTML='نام نمایشی: <b>'+currentUser.displayName+'</b><br>نام کاربری ورود: <b>'+currentUser.username+'</b><br>نقش: <b>'+roleLabel(currentUser.role)+'</b>';
+}
+function renderUserManagement(){
+ let box=document.getElementById('userMgmtContent'), addBtn=document.getElementById('addUserBtn'); if(!box)return;
+ if(!isAdmin()){ if(addBtn)addBtn.style.display='none'; box.innerHTML='<div class="lock-box"><div style="font-size:34px">🔒</div><b>این بخش فقط برای مدیر سیستم (Admin) است</b><br>تو با نقش «'+roleLabel(currentUser?currentUser.role:'user')+'» وارد شده‌ای و اجازه ساخت، ویرایش یا حذف کاربران را نداری.<br><span style="font-size:12px">اگر نیاز به حساب جدید داری، از مدیر فروشگاه بخواه برایت بسازد.</span></div>'; return; }
+ if(addBtn)addBtn.style.display='inline-block';
+ box.innerHTML='<div style="overflow:auto"><table><thead><tr><th>کاربر</th><th>نام کاربری ورود</th><th>نقش</th><th>وضعیت</th><th>توضیح</th><th>عملیات</th></tr></thead><tbody>'+
+ users.map(u=>'<tr><td><div style="display:flex;align-items:center;gap:9px"><div class="avatar" style="width:36px;height:36px;font-size:13px">'+escapeHtml((u.displayName||u.username)[0])+'</div><b>'+escapeHtml(u.displayName)+'</b>'+(currentUser&&u.id===currentUser.id?' <span class="pill p">حساب من</span>':'')+'</div></td><td><b>'+escapeHtml(u.username)+'</b></td><td><span class="pill '+(u.role==='admin'?'p':'b')+'">'+(u.role==='admin'?'👑 Admin':'کاربر عادی')+'</span></td><td><span class="pill '+(u.active?'g':'r')+'">'+(u.active?'فعال':'غیرفعال')+'</span></td><td style="color:var(--muted)">'+escapeHtml(u.note||'—')+'</td><td><div class="user-actions"><button class="follow" onclick="openUserModal('+u.id+')">✏️ ویرایش</button><button class="follow gray" onclick="toggleUserActive('+u.id+')">'+(u.active?'غیرفعال':'فعال')+'</button><button class="follow red" onclick="deleteUser('+u.id+')">حذف</button></div></td></tr>').join('')+
+ '</tbody></table></div><p class="switch-note" style="margin-top:10px">تعداد کاربران: '+faNum(users.length)+' نفر • مدیران: '+faNum(users.filter(u=>u.role==='admin').length)+' نفر • در شروع سیستم فقط کاربر <b>Admin</b> با رمز <b>Admin</b> وجود داشت.</p>';
+}
+function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function openUserModal(id=null){
+ if(!isAdmin() && id!==null && !(currentUser&&id===currentUser.id)){toast('فقط مدیر سیستم به مدیریت کاربران دسترسی دارد 🔒');return}
+ if(!isAdmin() && id===null){toast('فقط Admin می‌تواند کاربر جدید بسازد 🔒');return}
+ editUserId=id; let u=users.find(x=>x.id===id);
+ document.getElementById('userModalTitle').textContent=id?'ویرایش کاربر':'افزودن کاربر جدید';
+ document.getElementById('uDisplayName').value=u?u.displayName:''; document.getElementById('uUsername').value=u?u.username:'';
+ document.getElementById('uPassword').value=''; document.getElementById('uRole').value=u?u.role:'user'; document.getElementById('uActive').value=u?(u.active?'1':'0'):'1'; document.getElementById('uNote').value=u?(u.note||''):'';
+ document.getElementById('passReq').textContent=id?' (اختیاری)':'*'; document.getElementById('passHint').textContent=id?'اگر رمز را خالی بگذاری، رمز قبلی حفظ می‌شود.':'برای کاربر جدید رمز الزامی است (حداقل ۴ کاراکتر).';
+ document.getElementById('userModal').classList.add('open');
+}
+function editMyAccount(){ if(!currentUser)return; openUserModal(currentUser.id); }
+function saveUser(){
+ if(!isAdmin() && !(editUserId&&currentUser&&editUserId===currentUser.id)){toast('دسترسی نداری 🔒');return}
+ let displayName=document.getElementById('uDisplayName').value.trim(), username=document.getElementById('uUsername').value.trim(), password=document.getElementById('uPassword').value, role=document.getElementById('uRole').value, active=document.getElementById('uActive').value==='1', note=document.getElementById('uNote').value.trim();
+ if(!displayName||!username){toast('نام نمایشی و نام کاربری الزامی است');return}
+ if(users.some(u=>u.username.toLowerCase()===username.toLowerCase() && u.id!==editUserId)){toast('این نام کاربری قبلاً گرفته شده است ⚠️');return}
+ if(!editUserId && (!password||password.length<4)){toast('رمز عبور حداقل ۴ کاراکتر باشد');return}
+ if(editUserId && password && password.length<4){toast('رمز جدید حداقل ۴ کاراکتر باشد');return}
+ // prevent removing last admin
+ if(editUserId){let old=users.find(u=>u.id===editUserId); let admins=users.filter(u=>u.role==='admin'&&u.active); if(old.role==='admin' && (role!=='admin'||!active) && admins.length<=1 && old.active){toast('نمی‌توانی تنها مدیر فعال سیستم را حذف/غیرفعال کنی ⚠️');return}}
+ if(editUserId){let u=users.find(x=>x.id===editUserId); u.displayName=displayName; u.username=username; if(password)u.password=password; u.role=role; u.active=active; u.note=note; if(currentUser&&currentUser.id===u.id){currentUser=u; localStorage.setItem('mahoor_session',u.username); sessionStorage.setItem('mahoor_session',u.username);} toast('کاربر ویرایش شد ✓')}
+ else{users.push({id:Date.now(),username,password,displayName,role,active,note,created:new Date().toLocaleDateString('fa-IR')}); toast('کاربر جدید ساخته شد 🎉 حالا می‌تواند با نام کاربری خودش وارد شود.')}
+ saveUsers(); closeM('userModal'); updateCurrentUserUI(); renderUserManagement();
+}
+function toggleUserActive(id){let u=users.find(x=>x.id===id); if(!u)return; if(currentUser&&u.id===currentUser.id){toast('نمی‌توانی حساب خودت را غیرفعال کنی');return} if(u.role==='admin'&&u.active&&users.filter(x=>x.role==='admin'&&x.active).length<=1){toast('تنها مدیر فعال را نمی‌توان غیرفعال کرد');return} u.active=!u.active; saveUsers(); renderUserManagement(); toast(u.active?'حساب فعال شد ✓':'حساب غیرفعال شد');}
+function deleteUser(id){let u=users.find(x=>x.id===id); if(!u)return; if(currentUser&&u.id===currentUser.id){toast('نمی‌توانی حساب خودت را حذف کنی');return} if(u.role==='admin'&&users.filter(x=>x.role==='admin').length<=1){toast('تنها مدیر سیستم قابل حذف نیست');return} if(!confirm('کاربر «'+u.displayName+'» حذف شود؟'))return; users=users.filter(x=>x.id!==id); saveUsers(); renderUserManagement(); toast('کاربر حذف شد');}
+
+/* ---------- DATA ---------- */
+let products=[
+{id:1,name:'هدفون بی‌سیم مدل P47',cat:'لوازم دیجیتال',cost:850000,price:1290000,stock:4,sold:124,daily:3.2,img:'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80'},
+{id:2,name:'کیف دستی چرم مگنتی',cat:'کیف و اکسسوری',cost:620000,price:980000,stock:18,sold:86,daily:1.4,img:'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80'},
+{id:3,name:'کفش رانینگ نایک ایرزوم',cat:'کفش',cost:1850000,price:2750000,stock:11,sold:63,daily:1.1,img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80'},
+{id:4,name:'تی‌شرت نخی اورسایز',cat:'پوشاک',cost:185000,price:420000,stock:42,sold:210,daily:4.5,img:'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80'},
+{id:5,name:'عطر ادکلن لطافه ۱۰۰ میل',cat:'زیبایی و سلامت',cost:540000,price:890000,stock:3,sold:48,daily:1.8,img:'https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=600&q=80'},
+{id:6,name:'ساعت مچی مینیمال رزگلد',cat:'کیف و اکسسوری',cost:920000,price:1590000,stock:9,sold:37,daily:.7,img:'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80'},
+{id:7,name:'ست دوتایی بطری اسکین‌کر',cat:'زیبایی و سلامت',cost:310000,price:580000,stock:27,sold:95,daily:2,img:'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=600&q=80'},
+{id:8,name:'قابلمه گرانیتی ۵ پارچه',cat:'خانه و آشپزخانه',cost:1450000,price:2190000,stock:0,sold:29,daily:.5,img:'https://images.unsplash.com/photo-1585515320310-259814833e62?auto=format&fit=crop&w=600&q=80'}];
+let customers=[
+{id:1,name:'سارا محمدی',phone:'0912 345 6789',total:12850000,orders:12,daysAgo:2,done:false,avatar:'https://i.pravatar.cc/100?img=47'},
+{id:2,name:'امیررضا حسینی',phone:'0935 882 1044',total:9460000,orders:9,daysAgo:6,done:false,avatar:'https://i.pravatar.cc/100?img=12'},
+{id:3,name:'نازنین علیزاده',phone:'0919 774 2031',total:6310000,orders:7,daysAgo:11,done:false,avatar:'https://i.pravatar.cc/100?img=32'},
+{id:4,name:'مهسا کریمی',phone:'0930 118 4590',total:2840000,orders:4,daysAgo:38,done:false,avatar:'https://i.pravatar.cc/100?img=44'},
+{id:5,name:'رضا نادری',phone:'0912 908 3312',total:1980000,orders:3,daysAgo:47,done:false,avatar:'https://i.pravatar.cc/100?img=53'},
+{id:6,name:'لیلا صادقی',phone:'0991 204 8876',total:3420000,orders:5,daysAgo:54,done:false,avatar:'https://i.pravatar.cc/100?img=26'},
+{id:7,name:'کیان مرادی',phone:'0936 551 9020',total:760000,orders:1,daysAgo:1,done:false,avatar:'https://i.pravatar.cc/100?img=15'}];
+let sales=[
+{id:101,pid:4,cid:1,qty:2,total:840000,profit:470000,when:'امروز • ۱۰:۲۴'},
+{id:102,pid:1,cid:2,qty:1,total:1290000,profit:440000,when:'امروز • ۰۹:۱۰'},
+{id:103,pid:2,cid:3,qty:1,total:980000,profit:360000,when:'دیروز • ۱۸:۴۲'},
+{id:104,pid:7,cid:1,qty:3,total:1740000,profit:810000,when:'دیروز • ۱۶:۰۵'},
+{id:105,pid:3,cid:7,qty:1,total:2750000,profit:900000,when:'۲ روز پیش'},
+{id:106,pid:5,cid:4,qty:1,total:890000,profit:350000,when:'۳ روز پیش'}];
+const cats=[['پوشاک','👕'],['کیف و اکسسوری','👜'],['کفش','👟'],['لوازم دیجیتال','🎧'],['زیبایی و سلامت','💄'],['خانه و آشپزخانه','🍳']];
+const profitPct=p=>p.cost?Math.round((p.price-p.cost)/p.cost*100):0;
+const isVIP=c=>c.total>=8000000;
+function toast(m){let t=document.getElementById('toast');t.textContent=m;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(()=>t.style.display='none',3400)}
+function go(view,btn){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById('view-'+view).classList.add('active');document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));document.getElementById('sidebar').classList.remove('open');if(view==='reports')setTimeout(renderReportCharts,80);if(view==='sales')setTimeout(()=>makeChart('barChart2','bar'),80);if(view==='settings')renderUserManagement();window.scrollTo({top:0,behavior:'smooth'})}
+function closeM(id){document.getElementById(id).classList.remove('open')}
+document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
+function renderStats(){
+ let tp=sales.reduce((s,x)=>s+x.profit,0)+5780000, ts=sales.reduce((s,x)=>s+x.total,0)+19960000;
+ document.getElementById('stProfit').textContent=fmt(tp)+' تومان';document.getElementById('stSales').textContent=fmt(ts)+' تومان';
+ document.getElementById('stOrders').textContent=faNum(330+sales.length)+' عدد';document.getElementById('stToday').textContent=faNum(sales.filter(s=>s.when.includes('امروز')).length+12)+' فروش امروز';
+ document.getElementById('stCustomers').textContent=faNum(customers.length+51)+' نفر';
+ let low=products.filter(p=>p.stock<=lowThreshold);document.getElementById('stLow').textContent=faNum(low.length)+' هشدار';document.getElementById('navProdCount').textContent=faNum(products.length)+' کالا';
+ document.getElementById('alertText').innerHTML=low.length? escapeHtml(low[0].name)+'<br>موجودی: فقط '+faNum(low[0].stock)+' عدد مانده':'همه کالاها موجودی کافی دارند 🎉';
+ document.getElementById('notifList').innerHTML=low.length? low.map(p=>'<div class="reminder"><span>⚠️</span><div><p>'+escapeHtml(p.name)+'</p><small>فقط '+faNum(p.stock)+' عدد باقی مانده</small></div></div>').join(''):'<p style="font-size:13px;padding:10px 0">اعلان جدیدی نیست</p>';
+}
+function renderReminders(){
+ let list=customers.filter(c=>c.daysAgo>30&&!c.done);
+ let html=list.length?list.map(c=>'<div class="reminder"><div class="avatar" style="width:38px;height:38px;font-size:13px">'+escapeHtml(c.name[0])+'</div><div><p>'+escapeHtml(c.name)+'</p><small>'+faNum(c.daysAgo)+' روزه خرید نکرده • مجموع خرید '+fmt(c.total)+' تومان</small></div><button class="follow" onclick="markDone('+c.id+')">پیگیری شد ✓</button></div>').join(''):'<div class="empty"><div class="e">🎉</div><p>همه مشتری‌ها به‌موقع خرید کردن!</p></div>';
+ document.getElementById('reminderList').innerHTML=html;
+ document.getElementById('reminderFull').innerHTML=list.length?list.map(c=>'<div class="reminder"><div class="avatar">'+escapeHtml(c.name[0])+'</div><div><p>'+escapeHtml(c.name)+' • '+escapeHtml(c.phone)+'</p><small>آخرین خرید: '+faNum(c.daysAgo)+' روز پیش • '+faNum(c.orders)+' سفارش • '+fmt(c.total)+' تومان</small></div><button class="follow" onclick="sendMsg(\''+escapeHtml(c.name)+'\')">📩 ارسال پیام</button><button class="follow" onclick="markDone('+c.id+')">پیگیری شد ✓</button></div>').join(''):'<p style="color:var(--muted);font-size:13px">موردی برای پیگیری نیست.</p>';
+}
+function markDone(id){let c=customers.find(x=>x.id===id);c.done=true;toast('پیگیری '+c.name+' ثبت شد ✓');renderAll()}
+function sendMsg(name){toast('پیام یادآوری برای '+name+' آماده و کپی شد 📩')}
+function renderVIP(){let vips=customers.filter(isVIP).sort((a,b)=>b.total-a.total).slice(0,3);document.getElementById('vipList').innerHTML=vips.length?vips.map(c=>'<div class="vip-row"><img src="'+c.avatar+'"><div style="flex:1"><b style="font-size:13.5px">'+escapeHtml(c.name)+'</b> <span class="vip-tag">VIP</span><br><small style="color:var(--muted)">سفارش‌ها: '+faNum(c.orders)+' &nbsp; مجموع خرید: '+fmt(c.total)+' تومان</small></div><button class="follow" onclick="vipOffer(\''+escapeHtml(c.name)+'\')">🎁 تخفیف VIP</button></div>').join(''):'<p style="color:var(--muted);font-size:13px;padding:10px 0">هنوز مشتری VIP نداری.</p>'}
+function vipOffer(name){toast('کد تخفیف ۱۵٪ VIP برای '+name+' ساخته شد: VIP-'+Math.floor(1000+Math.random()*9000)+' 🎁')}
+function renderCats(){
+ document.getElementById('catsStrip').innerHTML=cats.map(([n,e])=>{let cnt=products.filter(p=>p.cat===n).length;return '<div class="cat" onclick="goCat(\''+n+'\')"><div class="e">'+e+'</div><p>'+n+'</p><small>'+faNum(cnt)+' کالا</small></div>'}).join('');
+ document.getElementById('catPills').innerHTML=['همه',...cats.map(c=>c[0])].map(c=>'<button class="'+(activeCat===c?'active':'')+'" onclick="setCat(\''+c+'\')">'+c+'</button>').join('')+'<button class="'+(onlyLow?'active':'')+'" onclick="filterLow()">⚠ کم‌موجودی</button>';
+}
+function goCat(c){activeCat=c;onlyLow=false;go('products');renderProducts()}
+function setCat(c){activeCat=c;onlyLow=false;renderProducts();renderCats()}
+function filterLow(){onlyLow=true;activeCat='همه';go('products');renderProducts();renderCats();toast('کالاهای رو به اتمام نمایش داده شدند ⚠️')}
+function stockInfo(p){if(p.stock===0)return{label:'تمام شده',cls:'r',color:'#f04438',pct:0};if(p.stock<=lowThreshold)return{label:'رو به اتمام',cls:'y',color:'#f79009',pct:25};return{label:'موجودی کافی',cls:'g',color:'#12b76a',pct:Math.min(100,p.stock*3)}}
+function renderProducts(){
+ let q=(document.getElementById('prodSearch')?.value||'').trim();let sort=document.getElementById('sortProd')?.value||'new';
+ let list=products.filter(p=>(activeCat==='همه'||p.cat===activeCat)&&(!onlyLow||p.stock<=lowThreshold)&&p.name.includes(q));
+ if(sort==='profit')list.sort((a,b)=>profitPct(b)-profitPct(a));if(sort==='stock')list.sort((a,b)=>a.stock-b.stock);if(sort==='price')list.sort((a,b)=>b.price-a.price);
+ document.getElementById('prodEmpty').style.display=list.length?'none':'block';
+ document.getElementById('productGrid').innerHTML=list.map(p=>{let pct=profitPct(p),pcls=pct>=50?'g':pct>=25?'y':'r',s=stockInfo(p);let days=p.daily?Math.floor(p.stock/p.daily):99;
+ return '<article class="prod"><img src="'+p.img+'" onerror="this.src=\'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80\'"><div class="prod-body"><div class="prod-top"><h4>'+escapeHtml(p.name)+'</h4><span class="pill '+pcls+'">سود '+faNum(pct)+'٪</span></div><small style="color:var(--muted)">'+escapeHtml(p.cat)+' • فروش کل: '+faNum(p.sold)+' عدد</small><div class="price"><span>خرید: <b>'+fmt(p.cost)+'</b></span><span>فروش: <b>'+fmt(p.price)+' تومان</b></span></div><div style="display:flex;justify-content:space-between;font-size:11.5px;gap:8px;flex-wrap:wrap"><span class="pill '+s.cls+'">'+s.label+' • '+faNum(p.stock)+' عدد</span><span style="color:var(--muted)">⏳ اتمام در ~ '+(p.stock===0?'—':faNum(days)+' روز')+'</span></div><div class="stockbar"><i style="width:'+s.pct+'%;background:'+s.color+'"></i></div><div class="prod-actions"><button onclick="openProduct('+p.id+')">✏️ ویرایش</button><button onclick="quickSale('+p.id+')">🛒 فروش</button><button class="del" onclick="delProduct('+p.id+')">🗑</button></div></div></article>'}).join('');
+ renderCats();
+}
+function openProduct(id=null){editId=id;document.getElementById('prodModalTitle').textContent=id?'ویرایش محصول':'افزودن محصول جدید';let p=products.find(x=>x.id===id);document.getElementById('pName').value=p?p.name:'';document.getElementById('pCat').value=p?p.cat:'پوشاک';document.getElementById('pCost').value=p?p.cost:200000;document.getElementById('pPrice').value=p?p.price:350000;document.getElementById('pStock').value=p?p.stock:10;document.getElementById('pImg').value=p?p.img:'';previewProfit();document.getElementById('productModal').classList.add('open')}
+function previewProfit(){let c=+document.getElementById('pCost').value||0,pr=+document.getElementById('pPrice').value||0;let pct=c?Math.round((pr-c)/c*100):0;document.getElementById('pProfitPrev').textContent='سود هر عدد: '+fmt(pr-c)+' تومان • درصد سود: '+faNum(pct)+'٪ '+(pct>=50?'🟢 عالی':pct>=25?'🟡 متوسط':'🔴 کم')}
+function saveProduct(){let name=document.getElementById('pName').value.trim();if(!name){toast('نام محصول را وارد کن');return}let data={name,cat:document.getElementById('pCat').value,cost:+document.getElementById('pCost').value||0,price:+document.getElementById('pPrice').value||0,stock:+document.getElementById('pStock').value||0,img:document.getElementById('pImg').value.trim()||'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80'};if(editId){Object.assign(products.find(p=>p.id===editId),data);toast('محصول ویرایش شد ✓')}else{products.unshift({id:Date.now(),sold:0,daily:1,...data});toast('محصول جدید اضافه شد 🎉')}closeM('productModal');renderAll()}
+function delProduct(id){if(!confirm('این محصول حذف شود؟'))return;products=products.filter(p=>p.id!==id);toast('محصول حذف شد');renderAll()}
+function quickSale(id){go('sales');selectProduct(id)}
+function renderCustomers(){
+ let list=customers.filter(c=>custFilter==='all'?true:custFilter==='vip'?isVIP(c):(c.daysAgo>30&&!c.done));
+ document.getElementById('customerGrid').innerHTML=list.length?list.map(c=>'<div class="cust" onclick="custDetail('+c.id+')"><div style="display:flex;gap:11px;align-items:center"><img src="'+c.avatar+'" style="width:52px;height:52px;border-radius:50%;object-fit:cover" onerror="this.style.display=\'none\'"><div><b>'+escapeHtml(c.name)+'</b> '+(isVIP(c)?'<span class="vip-tag">VIP ⭐</span>':'')+'<br><small style="color:var(--muted)">'+escapeHtml(c.phone)+'</small></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;font-size:12px"><div style="background:#fdf6fa;padding:9px;border-radius:10px">مجموع خرید<br><b>'+fmt(c.total)+' تومان</b></div><div style="background:#fdf6fa;padding:9px;border-radius:10px">سفارش‌ها<br><b>'+faNum(c.orders)+' سفارش</b></div></div><p style="font-size:11.5px;color:'+(c.daysAgo>30?'var(--red)':'var(--muted)')+';margin-top:10px">'+(c.daysAgo===0?'آخرین خرید: امروز':'آخرین خرید: '+faNum(c.daysAgo)+' روز پیش')+(c.daysAgo>30?' • نیازمند پیگیری ⏰':'')+'</p>'+(isVIP(c)?'<button class="follow" style="margin-top:8px" onclick="event.stopPropagation();vipOffer(\''+escapeHtml(c.name)+'\')">🎁 پیشنهاد تخفیف اختصاصی</button>':'')+'</div>').join(''):'<div class="empty" style="grid-column:1/-1"><div class="e">👥</div><p>مشتری‌ای در این دسته نیست.</p></div>';
+}
+function setCustFilter(f,btn){custFilter=f;btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderCustomers()}
+function openCustomer(){document.getElementById('customerModal').classList.add('open')}
+function saveCustomer(){let n=document.getElementById('cName').value.trim();if(!n){toast('نام مشتری را وارد کن');return}customers.unshift({id:Date.now(),name:n,phone:document.getElementById('cPhone').value||'—',total:0,orders:0,daysAgo:0,done:false,avatar:'https://i.pravatar.cc/100?img='+(10+Math.floor(Math.random()*50))});closeM('customerModal');toast('مشتری جدید ثبت شد 🎉');renderAll()}
+function custDetail(id){let c=customers.find(x=>x.id===id);let hs=sales.filter(s=>s.cid===id);document.getElementById('detailContent').innerHTML='<div style="text-align:center"><img src="'+c.avatar+'" style="width:76px;height:76px;border-radius:50%;object-fit:cover"><h3 style="margin:10px 0 4px">'+escapeHtml(c.name)+' '+(isVIP(c)?'<span class="vip-tag">VIP</span>':'')+'</h3><p style="color:var(--muted);font-size:13px">'+escapeHtml(c.phone)+' • '+faNum(c.orders)+' سفارش • مجموع '+fmt(c.total)+' تومان</p></div><h4 style="margin:18px 0 8px;font-size:14px">سابقه خرید</h4>'+(hs.length?hs.map(s=>{let p=products.find(x=>x.id===s.pid);return '<div class="reminder"><span>🧾</span><div><p>'+escapeHtml(p?p.name:'محصول')+'</p><small>'+s.when+' • '+faNum(s.qty)+' عدد</small></div><b style="margin-right:auto;font-size:13px">'+fmt(s.total)+' تومان</b></div>'}).join(''):'<p style="color:var(--muted);font-size:13px">هنوز خریدی ثبت نشده است.</p>')+'<button class="btn-primary" style="width:100%;margin-top:16px" onclick="closeM(\'detailModal\');go(\'sales\')">ثبت خرید جدید برای '+escapeHtml(c.name)+'</button>';document.getElementById('detailModal').classList.add('open')}
+function fillCustomerSelect(){let sel=document.getElementById('saleCustomer');if(!sel)return;let cur=sel.value;sel.innerHTML=customers.map(c=>'<option value="'+c.id+'">'+escapeHtml(c.name)+' — '+escapeHtml(c.phone)+'</option>').join('')+'<option value="new">＋ مشتری جدید...</option>';if(cur)sel.value=cur}
+function toggleNewCust(){document.getElementById('newCustBox').style.display=document.getElementById('saleCustomer').value==='new'?'block':'none'}
+function showProdDrop(q){let list=products.filter(p=>p.name.includes(q||'')||p.cat.includes(q||''));let d=document.getElementById('prodDrop');d.style.display='block';d.innerHTML=list.length?list.map(p=>'<div class="drop-item" onclick="selectProduct('+p.id+')"><img src="'+p.img+'"><div style="flex:1"><b>'+escapeHtml(p.name)+'</b><br><small style="color:var(--muted)">'+fmt(p.price)+' تومان • موجودی '+faNum(p.stock)+'</small></div><span class="pill '+stockInfo(p).cls+'">'+stockInfo(p).label+'</span></div>').join(''):'<div class="drop-item">محصولی پیدا نشد</div>'}
+function selectProduct(id){selectedProductId=id;let p=products.find(x=>x.id===id);if(!p)return;document.getElementById('saleProdInput').value=p.name;document.getElementById('prodDrop').style.display='none';document.getElementById('selectedProdInfo').textContent='✓ '+p.name+' • قیمت '+fmt(p.price)+' تومان • موجودی '+faNum(p.stock);calcSale()}
+document.addEventListener('click',e=>{if(!e.target.closest('.dropdown')){let d=document.getElementById('prodDrop');if(d)d.style.display='none'}});
+function calcSale(){let p=products.find(x=>x.id===selectedProductId);let qty=+document.getElementById('saleQty')?.value||0;let disc=+document.getElementById('saleDiscount')?.value||0;if(!p)return;let total=Math.max(0,p.price*qty-disc),profit=(p.price-p.cost)*qty-disc;document.getElementById('prevTotal').textContent=fmt(total)+' تومان';document.getElementById('prevProfit').textContent=fmt(profit)+' تومان';document.getElementById('prevStock').textContent=faNum(p.stock-qty)+' عدد';document.getElementById('saleWarn').textContent=qty>p.stock?'⚠️ موجودی کافی نیست! فقط '+faNum(p.stock)+' عدد داریم.':''}
+function submitSale(){
+ let p=products.find(x=>x.id===selectedProductId);if(!p){toast('اول یک محصول انتخاب کن 🔍');return}
+ let qty=+document.getElementById('saleQty').value||0;if(qty<1){toast('تعداد را وارد کن');return}if(qty>p.stock){toast('موجودی کافی نیست ⚠️');return}
+ let cid=document.getElementById('saleCustomer').value,cust;
+ if(cid==='new'){let n=document.getElementById('newCustName').value.trim();if(!n){toast('نام مشتری جدید را وارد کن');return}cust={id:Date.now(),name:n,phone:document.getElementById('newCustPhone').value||'—',total:0,orders:0,daysAgo:0,done:false,avatar:'https://i.pravatar.cc/100?img=5'};customers.unshift(cust)}else cust=customers.find(c=>c.id==cid);
+ let disc=+document.getElementById('saleDiscount').value||0;let total=p.price*qty-disc,profit=(p.price-p.cost)*qty-disc;
+ p.stock-=qty;p.sold+=qty;cust.total+=total;cust.orders+=1;cust.daysAgo=0;cust.done=false;
+ sales.unshift({id:Date.now(),pid:p.id,cid:cust.id,qty,total,profit,when:'امروز • همین الان'});
+ fillCustomerSelect();document.getElementById('saleCustomer').value=cust.id;toggleNewCust();calcSale();
+ document.getElementById('successText').innerHTML='<b style="color:var(--dark)">'+escapeHtml(p.name)+'</b> × '+faNum(qty)+' برای <b style="color:var(--dark)">'+escapeHtml(cust.name)+'</b><br>مبلغ: '+fmt(total)+' تومان<br><span style="color:var(--green);font-weight:800">سود این فروش: '+fmt(profit)+' تومان 💰</span><br>موجودی باقی‌مانده: '+faNum(p.stock)+' عدد';
+ document.getElementById('successModal').classList.add('open');renderAll();
+}
+function renderSales(){
+ document.getElementById('salesTable').innerHTML=sales.map(s=>{let p=products.find(x=>x.id===s.pid),c=customers.find(x=>x.id===s.cid);return '<tr><td>#'+faNum(String(s.id).slice(-4))+'</td><td><b>'+escapeHtml(p?p.name:'—')+'</b></td><td>'+escapeHtml(c?c.name:'—')+'</td><td>'+faNum(s.qty)+'</td><td>'+fmt(s.total)+'</td><td style="color:var(--green);font-weight:800">'+fmt(s.profit)+'</td><td>'+s.when+'</td><td><button class="follow" onclick="delSale('+s.id+')">حذف</button></td></tr>'}).join('');
+ document.getElementById('recentSales').innerHTML=sales.slice(0,5).map(s=>{let p=products.find(x=>x.id===s.pid),c=customers.find(x=>x.id===s.cid);return '<tr><td><b>'+escapeHtml(p?p.name:'—')+'</b></td><td>'+escapeHtml(c?c.name:'—')+'</td><td>'+faNum(s.qty)+'</td><td>'+fmt(s.total)+' تومان</td><td style="color:var(--green);font-weight:800">'+fmt(s.profit)+'</td><td>'+s.when+'</td></tr>'}).join('');
+ document.getElementById('salesCount').textContent=faNum(sales.length)+' فروش ثبت‌شده';
+ document.getElementById('forecastList').innerHTML=products.filter(p=>p.stock>0&&p.daily>0).sort((a,b)=>(a.stock/a.daily)-(b.stock/b.daily)).slice(0,3).map(p=>'<div style="display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.25);padding:6px 0;gap:8px"><span>'+escapeHtml(p.name)+'</span><b>~ '+faNum(Math.floor(p.stock/p.daily))+' روز دیگر</b></div>').join('')||'—';
+}
+function delSale(id){sales=sales.filter(s=>s.id!==id);toast('فروش حذف شد');renderAll()}
+function makeChart(id,type){
+ let el=document.getElementById(id);if(!el||typeof Chart==='undefined')return;if(charts[id])charts[id].destroy();
+ let labels=['شنبه','یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه'];
+ if(type==='line'){charts[id]=new Chart(el,{type:'line',data:{labels,datasets:[{label:'فروش',data:[12,19,15,25,22,34,48],borderColor:getComputedStyle(document.documentElement).getPropertyValue('--p2')||'#a855f7',backgroundColor:'rgba(168,85,247,.12)',fill:true,tension:.45,borderWidth:3,pointRadius:4},{label:'سود',data:[8,13,10,17,15,24,36],borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,.10)',fill:true,tension:.45,borderWidth:3,pointRadius:4}]},options:{responsive:true,plugins:{legend:{labels:{font:{family:'Vazirmatn'}}}},scales:{x:{ticks:{font:{family:'Vazirmatn',size:10}}},y:{ticks:{font:{family:'Vazirmatn',size:10},callback:v=>v+'M'}}}}})}
+ else{let top=[...products].sort((a,b)=>b.sold-a.sold).slice(0,5);charts[id]=new Chart(el,{type:'bar',data:{labels:top.map(p=>p.name.slice(0,14)),datasets:[{label:'تعداد فروش',data:top.map(p=>p.sold),backgroundColor:['#ec4899','#a855f7','#38bdf8','#f59e0b','#10b981'],borderRadius:10}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{family:'Vazirmatn',size:9}}},y:{ticks:{font:{family:'Vazirmatn'}}}}}})}
+}
+function renderReportCharts(){makeChart('lineChartR','line');makeChart('barChartR','bar');document.getElementById('rankProducts').innerHTML=[...products].sort((a,b)=>b.sold-a.sold).map((p,i)=>'<div class="reminder"><b>'+faNum(i+1)+'.</b><img src="'+p.img+'" style="width:38px;height:38px;border-radius:9px;object-fit:cover"><div><p>'+escapeHtml(p.name)+'</p><small>سود هر عدد '+fmt(p.price-p.cost)+' تومان</small></div><b style="margin-right:auto;font-size:12px">'+faNum(p.sold)+' فروش</b></div>').join('');document.getElementById('rankCustomers').innerHTML=[...customers].sort((a,b)=>b.total-a.total).map(c=>'<div class="reminder"><img src="'+c.avatar+'" style="width:38px;height:38px;border-radius:50%"><div><p>'+escapeHtml(c.name)+(isVIP(c)?' ⭐':'')+'</p><small>'+faNum(c.orders)+' سفارش</small></div><b style="margin-right:auto;font-size:12px">'+fmt(c.total)+' تومان</b></div>').join('')}
+function exportReport(){let csv='\ufeffمحصول,تعداد فروش,سود کل\n'+products.map(p=>p.name+','+p.sold+','+((p.price-p.cost)*p.sold)).join('\n');let a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='mahoor-report.csv';a.click();toast('گزارش دانلود شد ⬇')}
+function openAI(){let sel=document.getElementById('aiProduct');sel.innerHTML=products.map(p=>'<option value="'+p.id+'">'+escapeHtml(p.name)+' — موجودی '+faNum(p.stock)+' • فروش '+faNum(p.sold)+'</option>').join('');document.getElementById('aiModal').classList.add('open');genAI()}
+function genAI(){let p=products.find(x=>x.id==document.getElementById('aiProduct').value)||products[0];if(!p)return;let tone=document.getElementById('aiTone').value;let caps=['✨ '+p.name+' رسید! ✨\n\nدنبال یه انتخاب خاص و باکیفیتی؟ این دقیقاً همون چیزیه که لازم داشتی 😍\n\n💰 قیمت ویژه: فقط '+fmt(p.price)+' تومان\n📦 موجودی محدوده، دیر بجنبی تموم شده!\n\nبرای سفارش همین الان دایرکت بده 💌\n#فروشگاه_آنلاین #خرید_اینترنتی #'+p.cat.replace(/ /g,'_')+' #پیشنهاد_ویژه','🔥 پیشنهاد امروز فروشگاه ما 🔥\n\n'+p.name+'\nکیفیت عالی + قیمت منصفانه = یه خرید هوشمندانه ✅\n\n🎁 فقط '+fmt(p.price)+' تومان\n🚚 ارسال سریع به سراسر کشور\n\nثبت سفارش از دایرکت 📩\n#خرید_آنلاین #تخفیف #'+p.cat.replace(/ /g,'_'),'یه خبر خوب برای تو که دنبال بهترین‌هایی 🌸\n\n'+p.name+' با یه قیمت استثنایی اومده:\n💗 '+fmt(p.price)+' تومان\n\nموجودی محدوده عزیزم، برای رزرو دایرکت بده ✨\n#بوتیک #استایل #خرید_اینترنتی #'+p.cat.replace(/ /g,'_')];document.getElementById('aiOutput').value=caps[Math.floor(Math.random()*caps.length)]+'\n\n[لحن انتخابی: '+tone+']'}
+function copyAI(){let t=document.getElementById('aiOutput');t.select();if(navigator.clipboard)navigator.clipboard.writeText(t.value);toast('کپشن کپی شد! حالا توی اینستاگرام پیستش کن 📋')}
+function setTheme(name,el){document.querySelectorAll('.theme').forEach(t=>t.classList.remove('active'));el.classList.add('active');if(name==='pink')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',name);toast('تم فروشگاه عوض شد 🎨');setTimeout(()=>makeChart('lineChart','line'),100)}
+function uploadLogo(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=ev=>{let img=document.getElementById('shopLogoImg');img.src=ev.target.result;img.style.display='block';document.getElementById('logoEmoji').style.display='none';toast('لوگو آپلود شد ✓')};r.readAsDataURL(f)}
+function saveSettings(){let n=document.getElementById('shopNameInput').value.trim();if(n)document.getElementById('shopNameDisplay').textContent=n;lowThreshold=+document.getElementById('lowThreshold').value||5;toast('تنظیمات ذخیره شد ✓');renderAll()}
+function resetData(){if(confirm('داده‌های نمونه بازنشانی شود؟ (کاربران ساخته‌شده حذف نمی‌شوند)'))location.reload()}
+function globalSearchFn(q){q=q.trim();if(q.length<2)return;let p=products.find(x=>x.name.includes(q));let c=customers.find(x=>x.name.includes(q));if(p){go('products');document.getElementById('prodSearch').value=q;renderProducts()}else if(c){go('customers');toast('مشتری پیدا شد: '+c.name)}}
+function renderAll(){renderStats();renderProducts();renderCustomers();renderSales();renderReminders();renderVIP();renderCats();fillCustomerSelect();calcSale()}
+
+/* INIT */
+document.getElementById('todayText').textContent=new Date().toLocaleDateString('fa-IR',{weekday:'long',day:'numeric',month:'long'});
+(function initAuth(){
+ let saved=localStorage.getItem('mahoor_session')||sessionStorage.getItem('mahoor_session');
+ if(saved){let u=users.find(x=>x.username.toLowerCase()===saved.toLowerCase()&&x.active); if(u){currentUser=u; enterApp(); return;}}
+ document.getElementById('loginScreen').style.display='grid'; document.getElementById('appWrapper').style.display='none';
+})();
+</script>
+</body>
+</html>
